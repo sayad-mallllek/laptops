@@ -1,14 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-import ImageCard from "../components/cards/ItemCard.astro";
+import ItemCardSmall from "../components/cards/ItemCardSmall.astro";
+import { getLatestItems } from "../api/items.api";
+
+const items = await getLatestItems();
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
-    <a href="/test">
-      <ImageCard transition:name={`1 image`} class="w-72 h-96" id={1} />
-    </a>
+    <div class="flex flex-wrap gap-5 justify-center">
+      {
+        items.map((item) => (
+          <a href={"/items/" + item.id}>
+            <ItemCardSmall class="w-72" {...item} />
+          </a>
+        ))
+      }
+    </div>
   </main>
 </Layout>
 
@@ -16,7 +25,7 @@ import ImageCard from "../components/cards/ItemCard.astro";
   main {
     margin: auto;
     padding: 1rem;
-    width: 800px;
+    width: 1500px;
     max-width: calc(100% - 2rem);
     color: white;
     font-size: 20px;
