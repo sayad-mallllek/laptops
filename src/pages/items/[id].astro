@@ -1,56 +1,38 @@
 ---
 import { twMerge } from "tailwind-merge";
-import type { LightItemType } from "../../types/item.types";
+
 import { LIGHT_LAPTOP_ITEMS } from "../../api/data/items";
 import Layout from "../../layouts/Layout.astro";
+import ItemCard from "@components/cards/ItemCard.astro";
+import BreadCrumbs from "@components/BreadCrumbs.astro";
 
 import { getItemById } from "../../api/items.api";
-
-type Props = {
-  class?: string;
-};
 
 export function getStaticPaths() {
   return LIGHT_LAPTOP_ITEMS.map((item) => ({ params: { id: item.id } }));
 }
 
 const { id } = Astro.params;
-const { class: klass } = Astro.props;
 
 const data = await getItemById(+(id || 0));
 
-const { id: itemId, description, image, price, title } = data;
+if (!data) {
+  return {
+    status: 404,
+    error: new Error("Item not found"),
+  };
+}
+
+const { title } = data;
 ---
 
 <Layout title={title}>
-  <div
-    class={twMerge(
-      "mx-auto flex flex-col group bg-white border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7] max-w-[1000px]",
-      klass
-    )}
-    transition:name={"card-" + id}
-  >
-    <div
-      class="flex flex-col bg-white rounded-xl dark:bg-slate-900 dark:shadow-slate-700/[.7]"
-    >
-      <div class="w-full max-w-[650px] overflow-hidden">
-        <img
-          class="w-full aspect-square object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-in-out"
-          src={image}
-          alt="Image Description"
-        />
-      </div>
-      <div class="p-4 pt-2 md:p-5 md:pt-2">
-        <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-          {title}
-        </h3>
-        <p class="mt-1 text-xs text-gray-700 dark:text-gray-200">
-          ${price}
-        </p>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          {description}
-        </p>
-      </div>
-    </div>
-  </div>
+  <BreadCrumbs
+    crumbs={[
+      { title: "Home", href: "/" },
+      { title: "Laptops", href: "/laptops" },
+      { title, href: `/laptops/${id}` },
+    ]}
+  />
+  <ItemCard {...data} class="mx-auto" />
 </Layout>

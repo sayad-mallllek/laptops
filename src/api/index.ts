@@ -49,4 +49,4 @@ export class ApiClient {
   }
 }
 
-export const apiClient = new ApiClient(import.meta.env.API_URL);
+export const apiClient = new ApiClient(import.meta.env.BASE_API_URL);

@@ -1,0 +1,80 @@
+---
+import { twMerge } from "tailwind-merge";
+
+import { LIGHT_LAPTOP_ITEMS } from "../../api/data/items";
+import Layout from "../../layouts/Layout.astro";
+
+import { getItemById } from "../../api/items.api";
+import type { ItemType } from "@types/item.types";
+
+type Props = ItemType & {
+  class?: string;
+};
+
+const {
+  id,
+  description,
+  image,
+  price,
+  title,
+  cpu,
+  display,
+  gpu,
+  os,
+  ports,
+  ram,
+  storage,
+  weight,
+  class: klass,
+} = Astro.props;
+---
+
+<div class={twMerge("max-w-[768px] p-4 md:p-10", klass)}>
+  <div
+    class="mx-auto flex flex-col group bg-white border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7] max-w-[768px]"
+    transition:name={"card-" + id}
+  >
+    <div
+      class="flex flex-col bg-white rounded-xl dark:bg-slate-900 dark:shadow-slate-700/[.7]"
+    >
+      <div class="w-full overflow-hidden">
+        <img
+          class="w-full mx-auto rounded-t-xl group-hover:scale-105 transition-transform duration-500 ease-in-out"
+          src={image}
+          alt="Image Description"
+        />
+      </div>
+      <div class="p-4 pt-2 md:p-5 md:pt-2">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
+          {title}
+        </h1>
+        <p class="mt-1 text-md text-gray-700 dark:text-gray-200">
+          ${price}
+        </p>
+        <p class="mt-1 text-lg text-gray-500 dark:text-gray-400">
+          {description}
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3 p-4 pt-2 md:p-5 md:pt-2">
+      <ul
+        role="list"
+        class="w-full marker:text-blue-600 list-disc ps-5 space-y-2 text-sm text-gray-600 dark:text-gray-400"
+      >
+        <li><b>CPU:</b> {cpu}</li>
+        <li><b>Display:</b> {display}</li>
+        <li><b>GPU:</b> {gpu}</li>
+        <li><b>OS:</b> {os}</li>
+      </ul>
+      <ul
+        role="list"
+        class="w-full marker:text-blue-600 list-disc ps-5 space-y-2 text-sm text-gray-600 dark:text-gray-400"
+      >
+        <li><b>Ports:</b> {ports}</li>
+        <li><b>RAM:</b> {ram}</li>
+        <li><b>Storage:</b> {storage}</li>
+        <li><b>Weight:</b> {weight}</li>
+      </ul>
+    </div>
+  </div>
+</div>
