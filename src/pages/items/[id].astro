@@ -7,6 +7,8 @@ import ItemCard from "@components/cards/ItemCard.astro";
 import BreadCrumbs from "@components/BreadCrumbs.astro";
 
 import { getItemById } from "../../api/items.api";
+// import BreadCrumbs from "../../components/BreadCrumbs.astro";
+// import ItemCard from "../../components/cards/ItemCard.astro";
 
 export function getStaticPaths() {
   return LIGHT_LAPTOP_ITEMS.map((item) => ({ params: { id: item.id } }));
@@ -28,10 +30,10 @@ const { title } = data;
 
 <Layout title={title}>
   <BreadCrumbs
-    crumbs={[
-      { title: "Home", href: "/" },
-      { title: "Laptops", href: "/laptops" },
-      { title, href: `/laptops/${id}` },
+    paths={[
+      { name: "Home", href: "/" },
+      { name: "Laptops", href: "/laptops" },
+      { name: title, href: `/laptops/${id}` },
     ]}
   />
   <ItemCard {...data} class="mx-auto" />
