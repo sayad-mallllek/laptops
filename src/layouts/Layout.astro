@@ -21,7 +21,15 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <Header />
-  <body>
+  <body
+    class="[&::-webkit-scrollbar]:w-2
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-100
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-300
+  dark:[&::-webkit-scrollbar-track]:bg-slate-700
+  dark:[&::-webkit-scrollbar-thumb]:bg-slate-500"
+  >
     <slot />
   </body>
 
@@ -52,6 +60,33 @@ const { title } = Astro.props;
         Bitstream Vera Sans Mono,
         Courier New,
         monospace;
+    }
+
+    *::-webkit-scrollbar {
+      width: var(--tw-size-2);
+      overflow-y: overlay;
+    }
+
+    *::-webkit-scrollbar-track {
+      border-radius: var(--tw-border-radius-full);
+      --tw-bg-opacity: 1;
+      background-color: rgb(var(--tw-color-gray-100) / var(--tw-bg-opacity));
+    }
+
+    *::-webkit-scrollbar-thumb {
+      border-radius: var(--tw-border-radius-full);
+      --tw-bg-opacity: 1;
+      background-color: rgb(var(--tw-color-gray-300) / var(--tw-bg-opacity));
+    }
+
+    :is(.dark *)::-webkit-scrollbar-track {
+      --tw-bg-opacity: 1;
+      background-color: rgb(var(--tw-color-slate-700) / var(--tw-bg-opacity));
+    }
+
+    :is(.dark *)::-webkit-scrollbar-thumb {
+      --tw-bg-opacity: 1;
+      background-color: rgb(var(--tw-color-slate-500) / var(--tw-bg-opacity));
     }
   </style>
 

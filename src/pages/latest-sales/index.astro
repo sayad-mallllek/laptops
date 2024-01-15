@@ -1,0 +1,57 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+import ItemCardSmall from "@components/cards/ItemCardSmall.astro";
+import { getLatestItems } from "../../api/items.api";
+
+const items = await getLatestItems();
+
+const bounceAnimation = {
+  old: {
+    name: "slide-down", // same name as the keyframe in layouts/Main
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "forwards",
+  },
+  new: {
+    name: "slide-down",
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "backwards",
+  },
+};
+
+const bounce = {
+  forwards: bounceAnimation,
+  backwards: bounceAnimation,
+};
+---
+
+<Layout title="Latest Sales">
+  <main>
+    <h1>Latest Sales</h1>
+    <div
+      transition:name="latest-sales"
+      class="flex flex-wrap gap-5 justify-center"
+    >
+      {
+        [...items, ...items].map((item) => (
+          <a href={"/items/" + item.id}>
+            <ItemCardSmall class="w-72" {...item} />
+          </a>
+        ))
+      }
+    </div>
+    <div
+      transition:animate={bounce}
+      class="py-3 flex items-center text-sm text-gray-800 before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 dark:text-white dark:before:border-gray-600"
+    >
+      <a
+        class="text-blue-600 hover:text-blue-500 opacity-90"
+        href="latest-sales"
+      >
+        See More
+        </a>
+    </div>
+  </main>
+</Layout>

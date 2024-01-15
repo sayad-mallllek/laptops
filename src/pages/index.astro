@@ -5,18 +5,72 @@ import ItemCardSmall from "../components/cards/ItemCardSmall.astro";
 import { getLatestItems } from "../api/items.api";
 
 const items = await getLatestItems();
+
+const bounceAnimation = {
+  old: {
+    name: "slide-down", // same name as the keyframe in layouts/Main
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "forwards",
+  },
+  new: {
+    name: "slide-down",
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "backwards",
+  },
+};
+
+const bounce = {
+  forwards: bounceAnimation,
+  backwards: bounceAnimation,
+};
+
+const animateInAnimation = {
+  old: {
+    name: "animate-in", // same name as the keyframe in layouts/Main
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "forwards",
+  },
+  new: {
+    name: "animate-in",
+    duration: "0.7s",
+    easing: "linear",
+    fillMode: "backwards",
+  },
+};
+
+const animateIn = {
+  forwards: animateInAnimation,
+  backwards: animateInAnimation,
+};
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
-    <div class="flex flex-wrap gap-5 justify-center">
+    <div
+      transition:name="latest-sales"
+      class="flex flex-wrap gap-5 justify-center"
+    >
       {
-        items.map((item) => (
+        items.slice(0, 4).map((item) => (
           <a href={"/items/" + item.id}>
-            <ItemCardSmall class="w-72" {...item} />
+            <ItemCardSmall class="w-72" {...item} transition:animate={animateIn} />
           </a>
         ))
       }
+    </div>
+    <div
+      transition:animate={bounce}
+      class="py-3 flex items-center text-sm text-gray-800 before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 dark:text-white dark:before:border-gray-600"
+    >
+      <a
+        class="text-blue-600 hover:text-blue-500 opacity-90"
+        href="latest-sales"
+      >
+        See More
+        </a>
     </div>
   </main>
 </Layout>
@@ -94,6 +148,17 @@ const items = await getLatestItems();
     100% {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-100vh);
     }
   }
 </style>
