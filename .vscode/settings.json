@@ -1,5 +1,5 @@
 {
   "[astro]": {
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   }
 }
