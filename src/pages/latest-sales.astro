@@ -1,20 +1,23 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ItemCardSmall from "@components/cards/ItemCardSmall.astro";
+import Layout from "@layouts/Layout.astro";
 import Divider from "@components/dividers/Divider.astro";
+import ItemCardSmall from "@components/cards/ItemCardSmall.astro";
 import { getLatestItems } from "../api/items.api";
 import { bounce, animateIn } from "@utils/animation.utils";
+import BreadCrumbs from "@components/BreadCrumbs.astro";
 
 const items = await getLatestItems();
 ---
 
-<Layout title="Home Page">
+<Layout title="Latest Sales">
+  <!-- <h1>Latest Sales</h1> -->
+  <BreadCrumbs paths={[{ name: "Latest Sales", href: "/latest-sales" }]} />
   <div
     transition:name="latest-items"
     class="flex flex-wrap gap-5 justify-center"
   >
     {
-      items.slice(0, 4).map((item) => (
+      items.map((item) => (
         <a href={"/items/" + item.id}>
           <ItemCardSmall
             class="w-72"
@@ -25,8 +28,8 @@ const items = await getLatestItems();
       ))
     }
   </div>
-
   <Divider
+    class="opacity-0 pointer-events-none max-h-0 overflow-hidden"
     text="See More"
     href="/latest-sales"
     transitionName="latest-items-see-more"
