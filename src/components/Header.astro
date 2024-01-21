@@ -13,9 +13,14 @@
     <div class="relative md:flex md:items-center md:justify-between">
       <div class="flex items-center justify-between">
         <a
-          class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          class="flex-none text-xl font-semibold text-[#3256a8] dark:text-[#f3f4f6] dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 hover:scale-105 transition"
           href="#"
-          aria-label="Brand">Brand</a
+          aria-label="Brand"
+          ><p
+            class="logo from-blue-400 dark:from-blue-300 to-indigo-800 dark:to-indigo-600 bg-clip-text text-transparent bg-gradient-to-r"
+          >
+            ByteLaptops
+          </p></a
         >
         <div class="md:hidden">
           <button
@@ -141,4 +146,26 @@
     </div>
   </nav>
 </header>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;500&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap");
+
+  .logo {
+    font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 1.8rem;
+    /* color: #3256a8; */
+
+    /* text-shadow:
+      -1px 0 #f3f4f6,
+      0 1px #f3f4f6,
+      1px 0 #f3f4f6,
+      0 -1px #f3f4f6; */
+  }
+
+  .logo span {
+    font-size: 2rem;
+  }
+</style>
 <!-- ========== END HEADER ========== -->
