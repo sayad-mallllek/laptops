@@ -103,13 +103,30 @@ const { title } = Astro.props;
       height: auto;
       z-index: -1;
     }
-    h1 {
-      font-size: 4rem;
-      font-weight: 700;
+
+    h2 {
+      color: #13151a;
+      font-size: 1.5rem;
+      font-weight: 500;
       line-height: 1;
-      text-align: center;
-      margin-bottom: 1em;
+      margin-bottom: 1rem;
+
+      @media (prefers-color-scheme: dark) {
+        color: #f3f4f6;
+      }
     }
+    h1 {
+      color: #13151a;
+      font-size: 3rem;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 1rem;
+
+      @media (prefers-color-scheme: dark) {
+        color: #f3f4f6;
+      }
+    }
+
     .text-gradient {
       background-image: var(--accent-gradient);
       -webkit-background-clip: text;

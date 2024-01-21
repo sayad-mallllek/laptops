@@ -10,8 +10,8 @@ const items = await getLatestItems();
 ---
 
 <Layout title="Latest Sales">
-  <!-- <h1>Latest Sales</h1> -->
-  <BreadCrumbs paths={[{ name: "Latest Sales", href: "/latest-sales" }]} />
+  <h2 transition:name="latest-sales-title">Latest Sales</h2>
+  <!-- <BreadCrumbs paths={[{ name: "Latest Sales", href: "/latest-sales" }]} /> -->
   <div
     transition:name="latest-items"
     class="flex flex-wrap gap-5 justify-center"
