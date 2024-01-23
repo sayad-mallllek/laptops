@@ -9,7 +9,11 @@ const items = await getLatestItems();
 ---
 
 <Layout title="Home Page">
-  <h1 transition:name="latest-sales-title">Latest Sales</h1>
+  <div
+    class="bg-[linear-gradient(180deg,_#001834_0%,_rgba(10,_51,_99,_0.85)_100%)] w-full h-96 rounded-lg outline outline-1 outline-slate-600"
+  >
+  </div>
+  <h2 transition:name="latest-sales-title">Latest Sales</h2>
   <div
     transition:name="latest-items"
     class="flex flex-wrap gap-5 justify-center"
