@@ -4,16 +4,23 @@ import ItemCardSmall from "@components/cards/ItemCardSmall.astro";
 import Divider from "@components/dividers/Divider.astro";
 import { getLatestItems } from "../api/items.api";
 import { bounce, animateIn } from "@utils/animation.utils";
+import MainLogo from "@components/logos/MainLogo.astro";
 
 const items = await getLatestItems();
 ---
 
 <Layout title="Home Page">
+  <MainLogo />
   <div
-    class="bg-[linear-gradient(180deg,_#001834_0%,_rgba(10,_51,_99,_0.85)_100%)] w-full h-96 rounded-lg outline outline-1 outline-slate-600"
+    class="bg-[linear-gradient(180deg,_#001834_0%,_rgba(10,_51,_99,_0.85)_100%)] w-full min-h-96 py-6 px-4 rounded-lg outline outline-1 outline-slate-600 flex mb-4"
   >
+    <div class="flex flex-col">
+      <p class="text-3xl font-semibold">
+        A variety of products available at our store!
+      </p>
+    </div>
   </div>
-  <h2 transition:name="latest-sales-title">Latest Sales</h2>
+  <!-- <h2 transition:name="latest-sales-title">Latest Sales</h2> -->
   <div
     transition:name="latest-items"
     class="flex flex-wrap gap-5 justify-center"
