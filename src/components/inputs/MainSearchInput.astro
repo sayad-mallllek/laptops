@@ -61,16 +61,11 @@ const { class: klass } = Astro.props;
   document.addEventListener("keydown", (e) => {
     if (input && e.key === "Enter" && document.activeElement === input) {
       alert("Search for: " + input.value);
+      input.value = "";
     }
     if (input && e.ctrlKey && e.key === "k") {
       e.preventDefault();
       input.focus();
     }
   });
-
-  // input?.addEventListener("focus", (e) => {
-  //   if(input && e.key === "Enter") {
-  //     input.focus();
-  //   }
-  // });
 </script>
